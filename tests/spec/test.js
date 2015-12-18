@@ -46,13 +46,35 @@
           new URIError(),
           new ReferenceError(),
           new EvalError(),
-          Object.create(new Error())
+          Error.prototype,
+          TypeError.prototype,
+          SyntaxError.prototype,
+          RangeError.prototype,
+          URIError.prototype,
+          ReferenceError.prototype,
+          EvalError.prototype,
+          Object.create(Error.prototype)
         ],
         expected = values.map(function () {
           return true;
         }),
         actual = values.map(isError);
       expect(actual).toEqual(expected);
+    });
+
+    it('should work with sub-classed Error', function () {
+      function MyError() {}
+      MyError.prototype = Object.create(Error.prototype);
+      MyError.prototype.constructor = MyError;
+      MyError.prototype.name = 'MyError';
+
+      function MySubError() {}
+      MySubError.prototype = Object.create(MyError.prototype);
+      MySubError.prototype.constructor = MySubError;
+      MySubError.prototype.name = 'MySubError';
+
+      expect(isError(new MyError())).toEqual(true, 'MyError');
+      expect(isError(new MySubError())).toEqual(true, 'MySubError');
     });
   });
 }());

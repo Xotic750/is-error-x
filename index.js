@@ -39,7 +39,7 @@
  * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
  * behave as closely as possible to ECMAScript 6 (Harmony).
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -52,7 +52,7 @@
   freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
   nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
   es3:true, esnext:false, plusplus:true, maxparams:1, maxdepth:2,
-  maxstatements:11, maxcomplexity:4 */
+  maxstatements:11, maxcomplexity:5 */
 
 /*global module */
 
@@ -61,7 +61,8 @@
 
   var toStringTag = require('to-string-tag-x'),
     isObjectLike = require('is-object-like'),
-    $getPrototypeOf = Object.getPrototypeOf;
+    $getPrototypeOf = Object.getPrototypeOf,
+    errorProto = Error.prototype;
 
   /**
    * Determine whether or not a given `value` is an `Error` type.
@@ -83,9 +84,9 @@
       return false;
     }
     object = value;
-    maxLoop = 1000;
+    maxLoop = 100;
     while (object && maxLoop > -1) {
-      if (toStringTag(object) === '[object Error]') {
+      if (toStringTag(object) === '[object Error]' || object === errorProto) {
         return true;
       }
       object = $getPrototypeOf(object);
