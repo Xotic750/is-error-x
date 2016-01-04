@@ -1,6 +1,6 @@
 {
   "name": "is-error-x",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "isError module. Detect whether a value is an error.",
   "homepage": "https://github.com/Xotic750/is-error-x",
   "author": {
