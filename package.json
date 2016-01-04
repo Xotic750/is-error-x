@@ -28,7 +28,7 @@
     "url": "https://github.com/Xotic750/is-error-x/issues"
   },
   "dependencies": {
-    "to-string-tag-x": "^1.0.1",
+    "to-string-tag-x": "^1.0.2",
     "is-object-like": "^1.0.1"
   },
   "devDependencies": {
