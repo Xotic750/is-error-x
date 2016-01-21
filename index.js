@@ -39,7 +39,7 @@
  * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
  * behave as closely as possible to ECMAScript 6 (Harmony).
  *
- * @version 1.0.7
+ * @version 1.0.8
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -52,26 +52,23 @@
   freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
   nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
   es3:true, esnext:false, plusplus:true, maxparams:1, maxdepth:2,
-  maxstatements:11, maxcomplexity:5 */
+  maxstatements:10, maxcomplexity:4 */
 
 /*global module */
 
 ;(function () {
   'use strict';
 
-  var toStringTag = require('to-string-tag-x'),
-    isObjectLike = require('is-object-like'),
-    $getPrototypeOf = Object.getPrototypeOf,
-    errorProto, errorCheck;
-
-  function testStringTag(value) {
+  var toStringTag = require('to-string-tag-x');
+  var isObjectLike = require('is-object-like');
+  var $getPrototypeOf = Object.getPrototypeOf;
+  var errorCheck = function checkIfError(value) {
     return toStringTag(value) === '[object Error]';
-  }
+  };
 
-  if (toStringTag(Error.prototype) === '[object Error]') {
-    errorCheck = testStringTag;
-  } else {
-    errorProto = Error.prototype;
+  if (!errorCheck(Error.prototype)) {
+    var errorProto = Error.prototype;
+    var testStringTag = errorCheck;
     errorCheck = function checkIfError(value) {
       return value === errorProto || testStringTag(value);
     };
@@ -92,12 +89,11 @@
    * isError(new Error()); //true
    */
   module.exports = function isError(value) {
-    var object, maxLoop;
     if (!isObjectLike(value)) {
       return false;
     }
-    object = value;
-    maxLoop = 100;
+    var object = value;
+    var maxLoop = 100;
     while (object && maxLoop > -1) {
       if (errorCheck(object)) {
         return true;
