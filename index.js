@@ -22,37 +22,14 @@
  *
  * isError module. Detect whether a value is an error.
  *
- * <h2>ECMAScript compatibility shims for legacy JavaScript engines</h2>
- * `es5-shim.js` monkey-patches a JavaScript context to contain all EcmaScript 5
- * methods that can be faithfully emulated with a legacy JavaScript engine.
+ * Requires ES3 or above.
  *
- * `es5-sham.js` monkey-patches other ES5 methods as closely as possible.
- * For these methods, as closely as possible to ES5 is not very close.
- * Many of these shams are intended only to allow code to be written to ES5
- * without causing run-time errors in older engines. In many cases,
- * this means that these shams cause many ES5 methods to silently fail.
- * Decide carefully whether this is what you want. Note: es5-sham.js requires
- * es5-shim.js to be able to work properly.
- *
- * `json3.js` monkey-patches the EcmaScript 5 JSON implimentation faithfully.
- *
- * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
- * behave as closely as possible to ECMAScript 6 (Harmony).
- *
- * @version 1.1.0
+ * @version 1.1.1
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
  * @module is-error-x
  */
-
-/* jslint maxlen:80, es6:true, white:true */
-
-/* jshint bitwise:true, camelcase:true, curly:true, eqeqeq:true, forin:true,
-   freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
-   nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
-   es3:false, esnext:true, plusplus:true, maxparams:1, maxdepth:1,
-   maxstatements:3, maxcomplexity:2 */
 
 /* eslint strict: 1, max-statements: 1 */
 
@@ -64,7 +41,21 @@
 
   var toStringTag = require('to-string-tag-x');
   var isObjectLike = require('is-object-like');
-  var $getPrototypeOf = Object.getPrototypeOf;
+  var isNull = require('lodash.isnull');
+  var $getPrototypeOf = Object.getPrototypeOf || function getPrototypeOf(object) {
+    // eslint-disable-next-line no-proto
+    var proto = object.__proto__;
+    if (proto || isNull(proto)) {
+      return proto;
+    } else if (toStringTag(object.constructor) === '[object Function]') {
+      return object.constructor.prototype;
+    } else if (object instanceof Object) {
+      return Object.prototype;
+    } else {
+      return null;
+    }
+  };
+
   var errorCheck = function checkIfError(value) {
     return toStringTag(value) === '[object Error]';
   };
