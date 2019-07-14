@@ -7,19 +7,17 @@
  * @module is-error-x
  */
 
-'use strict';
+const toStringTag = require('to-string-tag-x');
+const isObjectLike = require('is-object-like-x');
+const $getPrototypeOf = require('get-prototype-of-x');
 
-var toStringTag = require('to-string-tag-x');
-var isObjectLike = require('is-object-like-x');
-var $getPrototypeOf = require('get-prototype-of-x');
-
-var errorCheck = function checkIfError(value) {
+let errorCheck = function checkIfError(value) {
   return toStringTag(value) === '[object Error]';
 };
 
 if (errorCheck(Error.prototype) === false) {
-  var errorProto = Error.prototype;
-  var testStringTag = errorCheck;
+  const errorProto = Error.prototype;
+  const testStringTag = errorCheck;
   errorCheck = function checkIfError(value) {
     return value === errorProto || testStringTag(value);
   };
@@ -44,8 +42,8 @@ module.exports = function isError(value) {
     return false;
   }
 
-  var object = value;
-  var maxLoop = 100;
+  let object = value;
+  let maxLoop = 100;
   while (object && maxLoop > -1) {
     if (errorCheck(object)) {
       return true;
