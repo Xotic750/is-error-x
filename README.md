@@ -21,31 +21,30 @@
 <a name="module_is-error-x"></a>
 
 ## is-error-x
+
 Detect whether a value is an error.
 
-**Version**: 1.5.0  
-**Author**: Xotic750 <Xotic750@gmail.com>  
-**License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
-**Copyright**: Xotic750  
 <a name="exp_module_is-error-x--module.exports"></a>
 
 ### `module.exports(value)` ⇒ <code>boolean</code> ⏏
+
 Determine whether or not a given `value` is an `Error` type.
 
 **Kind**: Exported function  
 **Returns**: <code>boolean</code> - Returns `true` if `value` is an `Error` type,
- else `false`.  
+else `false`.
 
-| Param | Type | Description |
-| --- | --- | --- |
+| Param | Type            | Description              |
+| ----- | --------------- | ------------------------ |
 | value | <code>\*</code> | The object to be tested. |
 
-**Example**  
-```js
-var isError = require('is-error-x');
+**Example**
 
-isError(); // false
-isError(Number.MIN_VALUE); // false
-isError('abc'); // false
-isError(new Error()); //true
+```js
+import isError from 'is-error-x';
+
+console.log(isError()); // false
+console.log(isError(Number.MIN_VALUE)); // false
+console.log(isError('abc')); // false
+console.log(isError(new Error())); //true
 ```

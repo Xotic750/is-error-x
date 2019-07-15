@@ -1,31 +1,10 @@
-let isError;
-
-if (typeof module === 'object' && module.exports) {
-  require('es5-shim');
-  require('es5-shim/es5-sham');
-
-  if (typeof JSON === 'undefined') {
-    JSON = {};
-  }
-
-  require('json3').runInContext(null, JSON);
-  require('es6-shim');
-  const es7 = require('es7-shim');
-  Object.keys(es7).forEach(function(key) {
-    const obj = es7[key];
-
-    if (typeof obj.shim === 'function') {
-      obj.shim();
-    }
-  });
-  isError = require('../../index.js');
-} else {
-  isError = returnExports;
-}
+import noop from 'lodash/noop';
+import isError from '../src/is-error-x';
 
 describe('isError', function() {
   it('should return `false` for non-error objects', function() {
-    const values = [true, 'abc', 1, null, undefined, function() {}, [], /r/];
+    expect.assertions(1);
+    const values = [true, 'abc', 1, null, undefined, noop, [], /r/];
     const expected = values.map(function() {
       return false;
     });
@@ -34,6 +13,7 @@ describe('isError', function() {
   });
 
   it('should return `true` for error objects', function() {
+    expect.assertions(1);
     const values = [
       new Error(),
       new TypeError(),
@@ -59,12 +39,15 @@ describe('isError', function() {
   });
 
   it('should work with sub-classed Error', function() {
+    expect.assertions(2);
+    /* eslint-disable-next-line lodash/prefer-noop */
     const MyError = function() {};
 
     MyError.prototype = Object.create(Error.prototype);
     MyError.prototype.constructor = MyError;
     MyError.prototype.name = 'MyError';
 
+    /* eslint-disable-next-line lodash/prefer-noop */
     const MySubError = function() {};
 
     MySubError.prototype = Object.create(MyError.prototype);

@@ -2,18 +2,18 @@ import toStringTag from 'to-string-tag-x';
 import isObjectLike from 'is-object-like-x';
 import $getPrototypeOf from 'get-prototype-of-x';
 
-let errorCheck = function checkIfError(value) {
+var errorCheck = function checkIfError(value) {
   return toStringTag(value) === '[object Error]';
 };
 
 if (errorCheck(Error.prototype) === false) {
-  const errorProto = Error.prototype;
-  const testStringTag = errorCheck;
+  var errorProto = Error.prototype;
+  var testStringTag = errorCheck;
+
   errorCheck = function checkIfError(value) {
     return value === errorProto || testStringTag(value);
   };
 }
-
 /**
  * Determine whether or not a given `value` is an `Error` type.
  *
@@ -21,13 +21,16 @@ if (errorCheck(Error.prototype) === false) {
  * @returns {boolean} Returns `true` if `value` is an `Error` type,
  *  else `false`.
  */
+
+
 export default function isError(value) {
   if (isObjectLike(value) === false) {
     return false;
   }
 
-  let object = value;
-  let maxLoop = 100;
+  var object = value;
+  var maxLoop = 100;
+
   while (object && maxLoop > -1) {
     if (errorCheck(object)) {
       return true;
@@ -39,3 +42,5 @@ export default function isError(value) {
 
   return false;
 }
+
+//# sourceMappingURL=is-error-x.esm.js.map
