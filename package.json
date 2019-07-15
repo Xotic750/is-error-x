@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "get-prototype-of-x": "^1.4.0",
-    "is-object-like-x": "^2.0.5",
+    "is-object-like-x": "^2.0.6",
     "to-string-tag-x": "^2.0.8"
   },
   "devDependencies": {
