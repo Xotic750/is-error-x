@@ -40,14 +40,13 @@ describe('isError', function() {
 
   it('should work with sub-classed Error', function() {
     expect.assertions(2);
-    /* eslint-disable-next-line lodash/prefer-noop */
+
     const MyError = function() {};
 
     MyError.prototype = Object.create(Error.prototype);
     MyError.prototype.constructor = MyError;
     MyError.prototype.name = 'MyError';
 
-    /* eslint-disable-next-line lodash/prefer-noop */
     const MySubError = function() {};
 
     MySubError.prototype = Object.create(MyError.prototype);
