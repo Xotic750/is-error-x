@@ -23,7 +23,7 @@ if (errorCheck(Error.prototype) === false) {
  */
 
 
-export default function isError(value) {
+var isError = function isError(value) {
   if (isObjectLike(value) === false) {
     return false;
   }
@@ -41,6 +41,8 @@ export default function isError(value) {
   }
 
   return false;
-}
+};
+
+export default isError;
 
 //# sourceMappingURL=is-error-x.esm.js.map

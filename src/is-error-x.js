@@ -21,7 +21,7 @@ if (errorCheck(Error.prototype) === false) {
  * @returns {boolean} Returns `true` if `value` is an `Error` type,
  *  else `false`.
  */
-export default function isError(value) {
+const isError = function isError(value) {
   if (isObjectLike(value) === false) {
     return false;
   }
@@ -38,4 +38,6 @@ export default function isError(value) {
   }
 
   return false;
-}
+};
+
+export default isError;
