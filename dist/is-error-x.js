@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2015-2017",
-  "date": "2019-07-18T00:02:16.559Z",
+  "date": "2019-07-18T18:54:50.246Z",
   "describe": "",
   "description": " Detect whether a value is an error.",
   "file": "is-error-x.js",
   "hash": "190cf97d178fcc0f105f",
   "license": "MIT",
-  "version": "2.0.6"
+  "version": "2.0.7"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
