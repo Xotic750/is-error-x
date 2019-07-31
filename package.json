@@ -1,6 +1,6 @@
 {
   "name": "is-error-x",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": " Detect whether a value is an error.",
   "homepage": "https://github.com/Xotic750/is-error-x",
   "author": {
@@ -49,9 +49,9 @@
     "url": "https://github.com/Xotic750/is-error-x/issues"
   },
   "dependencies": {
-    "get-prototype-of-x": "^2.0.17",
-    "is-object-like-x": "^2.0.25",
-    "to-string-tag-x": "^2.0.26"
+    "get-prototype-of-x": "^2.0.18",
+    "is-object-like-x": "^2.0.26",
+    "to-string-tag-x": "^2.0.27"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -63,7 +63,7 @@
     "@babel/runtime": "^7.5.5",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.8",
-    "@xotic750/eslint-config-recommended": "^1.0.4",
+    "@xotic750/eslint-config-recommended": "^1.0.5",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
