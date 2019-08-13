@@ -2,11 +2,11 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2015-2017",
-  "date": "2019-08-12T22:19:40.314Z",
+  "date": "2019-08-13T06:01:34.749Z",
   "describe": "",
   "description": " Detect whether a value is an error.",
   "file": "is-error-x.js",
-  "hash": "45a1da4fd15e8d5bb7c5",
+  "hash": "c32eed9712cc60912788",
   "license": "MIT",
   "version": "2.0.18"
 }
@@ -23,19 +23,34 @@
 })((function () {
   'use strict';
 
-  if (typeof self !== 'undefined') {
-    return self;
-  }
+  /* eslint-disable-next-line no-var */
+  var magic;
 
-  if (typeof window !== 'undefined') {
+  try {
+    /* eslint-disable-next-line no-extend-native */
+    Object.defineProperty(Object.prototype, '__magic__', {
+      /* eslint-disable-next-line object-shorthand */
+      get: function() {
+        return this;
+      },
+      /* eslint-disable-next-line prettier/prettier */
+      configurable: true
+    });
+
+    if (typeof __magic__ === 'undefined') {
+      magic = typeof self === 'undefined' ? window : self;
+    } else {
+      /* eslint-disable-next-line no-undef */
+      magic = __magic__;
+    }
+
+    /* eslint-disable-next-line no-underscore-dangle,no-use-extend-native/no-use-extend-native */
+    delete Object.prototype.__magic__;
+
+    return magic;
+  } catch (error) {
     return window;
   }
-
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-
-  return Function('return this')();
 }()), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
