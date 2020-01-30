@@ -2,7 +2,7 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2015-2017",
-  "date": "2019-09-05T19:40:20.067Z",
+  "date": "2020-01-30T21:48:44.119Z",
   "describe": "",
   "description": " Detect whether a value is an error.",
   "file": "is-error-x.js",
